@@ -1,18 +1,11 @@
-var fs = require('fs');
+// Parser.js, refactored version
+var Parser = function() {
 
-fs.readFile('log.txt', function(err, logData) {
+};
 
-	if (err) {
-		throw err;
-	}
-
-	// logData is a Buffer, converting to a string
-	var text = logData.toString();
-
+Parser.prototype.parse = function(text) {
 	var results = {};
-
 	var lines = text.split('\n');
-
 	lines.forEach(function(line) {
 		var parts = line.split(' ');
 		var letter = parts[1];
@@ -25,5 +18,7 @@ fs.readFile('log.txt', function(err, logData) {
 		results[letter] += parseInt(count, 10);
 	});
 
-	console.log(results);
-});
+	return results;
+};
+
+module.exports = Parser;
